@@ -1,8 +1,9 @@
+import SliderContainer from "./components/SliderContainer/sliderContainer";
 
 export default function Home() {
   return (
     <div className="">
-        <h1>فروشگاه ابزار</h1>
+        <SliderContainer />
     </div>
   );
 }
