@@ -17,3 +17,13 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+
+@layer components{
+  .layout{
+    @apply max-w-[1300px] mx-auto
+  }
+  .flex-center{
+    @apply flex justify-center items-center
+  }
+}
