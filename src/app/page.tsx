@@ -7,9 +7,9 @@ export default function Home() {
   return (
     <div>
         <Navbar />
-        <Footer />
         <SliderContainer />
         <OfferProducts/>
+        <Footer />
     </div>
   );
 }
