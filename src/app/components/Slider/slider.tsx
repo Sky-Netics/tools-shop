@@ -18,7 +18,7 @@ const Slider = () => {
     }, [imagesArray.length])
 
     return (
-        <div className="w-full h-[400px] bg-red-200 rounded-md max-lg:h-[300px] max-sm:h-[250px]">
+        <div className="w-full h-[400px] bg-gray-200 rounded-md max-lg:h-[300px] max-sm:h-[250px]">
             <Image src={imagesArray[indexArray]} alt={`slide image ${indexArray + 1}`} className="h-full rounded-md" />
         </div>
     )
