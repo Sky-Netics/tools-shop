@@ -28,13 +28,13 @@ const OfferProduct = () => {
     }, []);
 
     return ( 
-        <div className="h-full w-[200px] border px-3 py-3">
+        <div className="h-full w-[200px] border px-3 py-3 bg-white">
             <h1 className="text-[13px] text-customGray truncate">آچار بکس جاب مدل JB-032 مجموعه 32 عددی</h1>
 
             <Image src={Tools} alt="offer product image" />
 
             <div className="text-[14px] text-center font-semibold">
-                <span className="text-[#fdcf07]">۱۰,۰۰۰,۰۰۰</span>
+                <span className="text-customYellow">۱۰,۰۰۰,۰۰۰</span>
                 <span className="line-through ml-3">۱۲,۰۰۰,۰۰۰</span>
                 <span className="mr-1">تومن</span>
             </div>
