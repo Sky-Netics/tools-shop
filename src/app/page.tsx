@@ -1,4 +1,5 @@
 import Navbar from "./components/navbar";
+import Footer from "./components/footer";
 import SliderContainer from "./components/SliderContainer/sliderContainer";
 import OfferProducts from "./components/OfferProductsContainer/offerProductsContainer";
 import Category from "./components/Category/category";
@@ -9,7 +10,7 @@ import BlogPostsContainer from "./components/BlogPostsContainer/BlogPostsContain
 
 export default function Home() {
   return (
-    <div className="">
+    <div>
         <Navbar />
         <SliderContainer />
         <OfferProducts/>
@@ -18,6 +19,7 @@ export default function Home() {
         <Discount/>
         <LatestProductsContainer/>
         <BlogPostsContainer/>
+        <Footer />
     </div>
   );
 }
