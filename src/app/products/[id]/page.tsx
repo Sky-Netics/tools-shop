@@ -79,7 +79,9 @@ const ProductId = () => {
                         <button onClick={()=>setCount((prev) => prev+1)} className='bg-green-500 px-4 text-[22px] text-white rounded-md'>+</button>
                         <p className='text-[20px]'>{count}</p>
                         <button onClick={() => setCount((prev) => (prev > 1 ? prev - 1 : prev))} className='bg-red-500 px-4 text-[22px] text-white rounded-md'>-</button>
+                        <Link href={'/cart'}>
                         <button className='bg-blue-500 text-white px-4 py-2 rounded-md mr-12 text-[16px]'>افزودن به سبد خرید</button>
+                        </Link>
                 </div>
 
                 <div className='flex my-4'>
