@@ -2,6 +2,7 @@ import OfferTitleImage from '../../../../public/assets/offer-title-1.png';
 import Image from 'next/image';
 import OfferProduct from '../OfferProduct/offerProduct';
 
+
 const OfferProducts = () => {
     return (
         <div className="mx-[150px] bg-[#FF4343] h-[358px] rounded-md mt-1 mb-2 flex overflow-hidden max-[1330px]:mx-[75px] max-[1200px]:mx-[30px] max-[1100px]:justify-center">

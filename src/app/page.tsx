@@ -11,7 +11,6 @@ import BlogPostsContainer from "./components/BlogPostsContainer/BlogPostsContain
 export default function Home() {
   return (
     <div>
-        <Navbar />
         <SliderContainer />
         <OfferProducts/>
         <Category />
@@ -19,7 +18,6 @@ export default function Home() {
         <Discount/>
         <LatestProductsContainer/>
         <BlogPostsContainer/>
-        <Footer />
     </div>
   );
 }

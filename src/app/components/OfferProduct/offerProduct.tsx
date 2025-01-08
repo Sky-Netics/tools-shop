@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Tools from '../../../../public/assets/tools/tools1.webp';
 import { useState, useEffect } from "react";
+import Link from "next/link";
 
 const OfferProduct = () => {
     const [timeLeft, setTimeLeft] = useState({ hours: '00', minutes: '00', seconds: '00' });
@@ -28,32 +29,34 @@ const OfferProduct = () => {
     }, []);
 
     return ( 
-        <div className="h-full w-[200px] border px-3 py-3 bg-white">
-            <h1 className="text-[13px] text-customGray truncate">آچار بکس جاب مدل JB-032 مجموعه 32 عددی</h1>
+        <Link href={'/products/1'}>
+            <div className="h-full w-[200px] border px-3 py-3 bg-white">
+                <h1 className="text-[13px] text-customGray truncate">آچار بکس جاب مدل JB-032 مجموعه 32 عددی</h1>
 
-            <Image src={Tools} alt="offer product image" />
+                <Image src={Tools} alt="offer product image" />
 
-            <div className="text-[14px] text-center font-semibold">
-                <span className="text-customYellow">۱۰,۰۰۰,۰۰۰</span>
-                <span className="line-through ml-3">۱۲,۰۰۰,۰۰۰</span>
-                <span className="mr-1">تومن</span>
+                <div className="text-[14px] text-center font-semibold">
+                    <span className="text-customYellow">۱۰,۰۰۰,۰۰۰</span>
+                    <span className="line-through ml-3">۱۲,۰۰۰,۰۰۰</span>
+                    <span className="mr-1">تومن</span>
+                </div>
+
+                <div className="flex gap-2 mt-2 justify-center text-center text-white bg-gray-900 p-2 rounded-lg text-[12px]">
+                    <div className="flex flex-col items-center">
+                        <span className="font-bold">{timeLeft.hours || '00'}</span>
+                        <span>ساعت</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <span className="font-bold">{timeLeft.minutes || '00'}</span>
+                        <span>دقیقه</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                        <span className="font-bold">{timeLeft.seconds || '00'}</span>
+                        <span>ثانیه</span>
+                    </div>
+                </div>
             </div>
-
-            <div className="flex gap-2 mt-2 justify-center text-center text-white bg-gray-900 p-2 rounded-lg text-[12px]">
-                <div className="flex flex-col items-center">
-                    <span className="font-bold">{timeLeft.hours || '00'}</span>
-                    <span>ساعت</span>
-                </div>
-                <div className="flex flex-col items-center">
-                    <span className="font-bold">{timeLeft.minutes || '00'}</span>
-                    <span>دقیقه</span>
-                </div>
-                <div className="flex flex-col items-center">
-                    <span className="font-bold">{timeLeft.seconds || '00'}</span>
-                    <span>ثانیه</span>
-                </div>
-            </div>
-        </div>
+        </Link>
     );
 }
 
