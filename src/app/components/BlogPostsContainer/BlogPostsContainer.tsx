@@ -6,7 +6,7 @@ import BlogPost from "../BlogPost/blogPost"
 const BlogPostsContainer = () => {
     return(
         <div className="py-8">
-            <div className="mx-[150px] mb-10">
+            <div className="mx-[150px] mb-2">
        
             <div className="flex">
                 <div className="flex items-center">
