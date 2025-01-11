@@ -3,7 +3,7 @@ import ElectricProduct from "../Product/Product";
 
 const ElectricProductsContainer = () => {
     return (
-        <div className="mx-[150px] mb-10">
+        <div className="mx-[150px] mb-10 max-md:mx-[50px] overflow-hidden max-sm:mx-[10px]">
 
         
             <div className="flex">
@@ -19,7 +19,7 @@ const ElectricProductsContainer = () => {
 
                 </div>
 
-                <div className="mr-3 py-1">
+                <div className="mr-3 py-1 w-[200px]">
                     <Link className="flex items-center" href={'/'}>
                     <div className="bg-customYellow rounded-[50%] w-4 h-4">
                         <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">

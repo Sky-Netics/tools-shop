@@ -6,7 +6,7 @@ import ElectricProduct from "../Product/Product"
 
 const LatestProductsContainer = () =>{
     return(
-        <div className="mx-[150px] my-6">
+        <div className="mx-[150px] my-6 max-xl:mx-[50px] overflow-hidden max-sm:mx-[10px]">
 
             <div className="flex items-center">
 

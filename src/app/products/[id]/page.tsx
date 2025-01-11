@@ -20,15 +20,15 @@ const ProductId = () => {
     console.log(productId)
 
     return (
-        <div className='mx-[100px] my-10'>
+        <div className='mx-[100px] my-10 max-[900px]:mx-[30px]'>
             <h1>کلاه ایمنی هترمن مدل MK6 بدون عینک</h1> 
 
             <div className='border border-[#767676] rounded-lg  mt-10 flex flex-col py-6 px-3'>
                 
-                <div className='flex'>
+                <div className='flex max-[550px]:flex-col'>
 
                 
-                <div className='flex  w-5/12 p-2'>
+                <div className='flex w-5/12 p-2 max-md:justify-center max-[550px]:w-full'>
 
                 <div className='w-fit h-fit ml-2'>
                     <div className='border mb-2'>
@@ -44,14 +44,15 @@ const ProductId = () => {
                     </div>
                 </div>
 
-                <div className='border'>
-                    <Image src={Hamlet} alt='Hamlet' width={392} height={392}/>
+                <div className='border h-fit'>
+                    <Image src={Hamlet} alt='Hamlet' width={392} height={392} className='max-md:w-[250px]'/>
                 </div>
 
                 </div>
 
-                <div className='w-7/12  py-2 px-2 text-[14px] text-customGray'>
-                <div className='flex'>
+                <div className='w-7/12  py-2 px-2 text-[14px] text-customGray max-[550px]:w-full flex flex-col max-[550px]:items-center'>
+                
+                <div className='flex max-[550px]:mt-5'>
                     <Image src={Tick} alt='tick icon' className='ml-2'/>
                     <p>موجود است</p>
                 </div>
@@ -75,13 +76,18 @@ const ProductId = () => {
 
                 </div>
 
-                <div className='flex items-center my-6 gap-2'>
-                        <button onClick={()=>setCount((prev) => prev+1)} className='bg-green-500 px-4 text-[22px] text-white rounded-md'>+</button>
-                        <p className='text-[20px]'>{count}</p>
-                        <button onClick={() => setCount((prev) => (prev > 1 ? prev - 1 : prev))} className='bg-red-500 px-4 text-[22px] text-white rounded-md'>-</button>
-                        <Link href={'/cart'}>
-                        <button className='bg-blue-500 text-white px-4 py-2 rounded-md mr-12 text-[16px]'>افزودن به سبد خرید</button>
-                        </Link>
+                <div className='flex items-center my-6 gap-2 max-[700px]:flex-col'>
+                        
+                        <div className='flex gap-2 max-[700px]:gap-6'>
+                            <button onClick={()=>setCount((prev) => prev+1)} className='bg-green-500 px-4 text-[22px] text-white rounded-md'>+</button>
+                            <p className='text-[20px]'>{count}</p>
+                            <button onClick={() => setCount((prev) => (prev > 1 ? prev - 1 : prev))} className='bg-red-500 px-4 text-[22px] text-white rounded-md'>-</button>
+                        </div>
+                        <div>
+                            <Link href={'/cart'}>
+                            <button className='bg-blue-500 text-white px-4 py-2 rounded-md mr-12 text-[16px] max-[700px]:mr-0 max-[700px]:mt-2'>افزودن به سبد خرید</button>
+                            </Link>
+                        </div>
                 </div>
 
                 <div className='flex my-4'>
@@ -97,10 +103,10 @@ const ProductId = () => {
                 </div>
 
 
-                <div className='flex mt-4'>
-                    <div className='w-5/12 flex flex-col'>
+                <div className='flex mt-4 max-[550px]:flex-col max-[550px]:items-center max-[550px]:gap-6'>
+                    <div className='w-5/12 flex flex-col max-[550px]:w-full max-[550px]:items-center'>
 
-                    <div className='w-5/12 flex items-center'>
+                    <div className='flex items-center'>
                         <div className='border-2 w-fit p-1 border-customYellow rounded-[50%]'>
                             <Image src={exclamationMark} alt='Exclamation Mark icon' width={15} height={15} />
                         </div>
@@ -114,8 +120,8 @@ const ProductId = () => {
 
                     </div>
 
-                    <div className='w-7/12 flex flex-col space-y-2'>
-                        <div className='h-[70px] rounded-md px-4 py-2 border border-customGray flex justify-between'>
+                    <div className='w-7/12 flex flex-col space-y-2 max-[550px]:w-full'>
+                        <div className='h-[70px] rounded-md px-4 py-2 border border-customGray flex justify-between max-xl:py-1 max-[933px]:h-[80px] max-[755px]:h-[100px] max-[620px]:h-[120px] max-[550px]:items-center'>
                             <div className='border-2 border-customYellow w-fit p-1 rounded-[50%] h-fit ml-2'>
                                 <Image src={exclamationMark} alt='exclamation mark icon' width={10} height={10}/>
                             </div>

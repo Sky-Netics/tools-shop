@@ -14,12 +14,12 @@ const BlogPost = () => {
                 <h1>بهترین مارک آچار فرانسه در سال ۲۰۲۳</h1>
             </div>
 
-            <div className="flex items-center justify-between py-3">
+            <div className="flex items-center justify-between py-3 max-sm:flex-col">
                 <button className="bg-customYellow px-6 py-1 rounded-lg flex items-center gap-2 transition hover:bg-[#ffde39]">
                     خواندن
                     <Image src={LeftArrow} alt="Left arrow" width={15} height={15}/>
                 </button>
-                <h1 className="text-customGray text-[14px]">19/10/1403</h1>
+                <h1 className="text-customGray text-[14px] max-sm:mt-5">19/10/1403</h1>
             </div>
         </div>
     )

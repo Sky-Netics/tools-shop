@@ -5,8 +5,8 @@ import BlogPost from "../BlogPost/blogPost"
 
 const BlogPostsContainer = () => {
     return(
-        <div className="py-8">
-            <div className="mx-[150px] mb-2">
+        <div className="py-8 overflow-hidden">
+            <div className="mx-[150px] mb-2 max-xl:mx-[50px] max-sm:mx-[10px]">
        
             <div className="flex">
                 <div className="flex items-center">
@@ -27,7 +27,7 @@ const BlogPostsContainer = () => {
                         </svg>
                     </div>
 
-                    <h1 className="mr-2 text-[14px]">مشاهده همه</h1>
+                    <h1 className="mr-2 text-[14px] w-[100px]">مشاهده همه</h1>
                     </Link>
                 </div>
 
