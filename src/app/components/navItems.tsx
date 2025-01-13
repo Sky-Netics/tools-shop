@@ -30,7 +30,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="sizeTool" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-500">تراز دستی</a>       
                 <a href="/" className="hover:text-yellow-500">تراز لیزری</a>
@@ -50,7 +50,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="fuelTool" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-400">اره بنزینی</a>
                 <a href="/" className="hover:text-yellow-400">پرچ کن</a>
@@ -69,7 +69,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="charging" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-400">اتو</a>
                 <a href="/" className="hover:text-yellow-400">پولیش</a>
@@ -87,7 +87,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="cutting" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-400">الکترود جوشکاری</a>
                 <a href="/" className="hover:text-yellow-400">ترانس جوشکاری</a>
@@ -104,7 +104,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="handTool" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-400">آچار</a>
                 <a href="/" className="hover:text-yellow-400">انبر</a>
@@ -125,7 +125,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="workShop" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-400">تلمبه</a>
                 <a href="/" className="hover:text-yellow-400">جرثقیل</a>
@@ -142,7 +142,7 @@ const NavItems = () => {
             </div>
             <div className="w-full h-4 absolute"></div>
             <div id="safty" style={{opacity:0,top:"64px"}}
-                className={`bg-white absolute flex-col transition-all flex
+                className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
                 <a href="/" className="hover:text-yellow-400">دستکش</a>
                 <a href="/" className="hover:text-yellow-400">عینک</a>

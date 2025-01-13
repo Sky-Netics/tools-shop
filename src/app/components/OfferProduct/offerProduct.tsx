@@ -1,13 +1,22 @@
 'use client';
 import Image from "next/image";
-import Tools from '../../../../public/assets/tools/tools1.webp';
 import { useState, useEffect } from "react";
 import Link from "next/link";
 
-const OfferProduct = () => {
-    const [timeLeft, setTimeLeft] = useState({ hours: '00', minutes: '00', seconds: '00' });
+type PropsType = {
+    title: string,
+    currentPrice: string,
+    src: string
+}
 
+const OfferProduct = ({title, currentPrice, src}: PropsType) => {
+    const [timeLeft, setTimeLeft] = useState({ hours: '00', minutes: '00', seconds: '00' });
+    const [isMounted, setIsMounted] = useState(false);
+
+    // This useEffect will run once on the client side, after the component mounts
     useEffect(() => {
+        setIsMounted(true); // Ensure timer is only set on client side
+
         const endTime = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours from now
         const timer = setInterval(() => {
             const now = new Date().getTime();
@@ -28,16 +37,20 @@ const OfferProduct = () => {
         return () => clearInterval(timer);
     }, []);
 
-    return ( 
-        <Link href={'/products/1'}>
-            <div className="h-full w-[200px] border px-3 py-3 bg-white">
-                <h1 className="text-[13px] text-customGray truncate">آچار بکس جاب مدل JB-032 مجموعه 32 عددی</h1>
+    // Render null or a loading state until the component is mounted on the client
+    if (!isMounted) {
+        return null;
+    }
 
-                <Image src={Tools} alt="offer product image" />
+    return (
+            <div className="h-full w-[200px] border px-3 py-3 bg-white">
+                <h1 className="text-[13px] text-customGray truncate">{title}</h1>
+
+                <Image src={`http://127.0.0.1:8000${src}`} width={180} height={140} className="my-1" alt="offer product image" />
 
                 <div className="text-[14px] text-center font-semibold">
-                    <span className="text-customYellow">۱۰,۰۰۰,۰۰۰</span>
-                    <span className="line-through ml-3">۱۲,۰۰۰,۰۰۰</span>
+                    <span className="text-customYellow">{currentPrice}</span>
+                    <span className="line-through ml-3">1000</span>
                     <span className="mr-1">تومن</span>
                 </div>
 
@@ -56,7 +69,6 @@ const OfferProduct = () => {
                     </div>
                 </div>
             </div>
-        </Link>
     );
 }
 

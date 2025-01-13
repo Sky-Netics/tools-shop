@@ -1,19 +1,17 @@
 import Image from "next/image"
-import Tool2 from "../../../../public/assets/tools/Hamlet.webp"
 import Link from "next/link"
 
-const Product = () => {
+const Product = ({title, price, image, id}) => {
     return(
-        <Link href={'/products/1'}>
             <div className="h-[321px] w-[197px] border p-3">
-                <Image src={Tool2} alt="tool image"/>
+                <Image src={`http://127.0.0.1:8000/${image}`} width={180} height={180} alt="tool image"/>
                 
                 <div className="flex">
-                <span className="text-customYellow">۷۰,۰۰۰ </span>
+                <span className="text-customYellow">{price}</span>
                 <span className="text-[14px] mr-1">تومن</span>
                 </div>
 
-                <h1 className="text-[14px] mt-1">کلاه ایمنی هترمن مدل MK6 بدون عینک</h1>
+                <h1 className="text-[14px] mt-1">{title}</h1>
 
                 <div className="flex mt-4">
                 
@@ -37,7 +35,6 @@ const Product = () => {
 
                 </div>
             </div>
-        </Link>
     )
 }
 

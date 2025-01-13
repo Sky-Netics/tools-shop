@@ -2,26 +2,70 @@
 
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
-import Hamlet from '../../../../public/assets/tools/Hamlet.webp'
-import Hamlet2 from '../../../../public/assets/Helmet2.webp'
-import Hamlet3 from '../../../../public/assets/Helmet3.webp'
-import Tick from '../../../../public/assets/tick.svg'
-import exclamationMark from '../../../../public/exclamation-mark.svg'
-import truck from '../../../../public/truck.svg'
-import Telegram from '../../../../public/telegram.svg'
-import { useState } from 'react'
+import Hamlet from '../../../../../public/assets/tools/Hamlet.webp'
+import Hamlet2 from '../../../../../public/assets/Helmet2.webp'
+import Hamlet3 from '../../../../../public/assets/Helmet3.webp'
+import Tick from '../../../../../public/assets/tick.svg'
+import exclamationMark from '../../../../../public/exclamation-mark.svg'
+import truck from '../../../../../public/truck.svg'
+import Telegram from '../../../../../public/telegram.svg'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 const ProductId = () => {
+
+    const [productData , setProductData] = useState([])
     const params = useParams()
-    const { productId } = params
+    const { id } = params
     const [count, setCount] = useState(1)
 
-    console.log(productId)
+    console.log(id)
+
+//  Catching product data
+    useEffect(()=>{
+        fetch(`http://127.0.0.1:8000/store/products/${id}`, {
+            cache: 'no-store',
+          })
+            .then((res) => res.json())
+            .then((data) => {
+                if(!data){
+                    throw new Error('it doesnt work')
+                }
+                setProductData(data)
+                window.location.href = '/cart'
+                console.log(data)
+            })
+    }, [])
+
+//  Send product data to cart
+async function addToCart() {
+    try {
+        const response = await fetch(`http://127.0.0.1:8000/usercart/cart/add/${id}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json', 
+                'Authorization': `Bearer ${localStorage.getItem("access")}`
+            },
+            body: JSON.stringify({ product_id: id }),
+            cache: 'no-store'
+        });
+        
+        if (!response.ok) {
+            throw new Error(`Error: ${response.status} ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log(data);
+    } catch (error) {
+        console.error('Error adding to cart:', error);
+    }
+}
+
+    
 
     return (
         <div className='mx-[100px] my-10 max-[900px]:mx-[30px]'>
-            <h1>کلاه ایمنی هترمن مدل MK6 بدون عینک</h1> 
+            <h1>{productData.name}</h1> 
 
             <div className='border border-[#767676] rounded-lg  mt-10 flex flex-col py-6 px-3'>
                 
@@ -30,7 +74,7 @@ const ProductId = () => {
                 
                 <div className='flex w-5/12 p-2 max-md:justify-center max-[550px]:w-full'>
 
-                <div className='w-fit h-fit ml-2'>
+                {/* <div className='w-fit h-fit ml-2'>
                     <div className='border mb-2'>
                         <Image src={Hamlet} alt='hamlet image' width={75} height={75}/>
                     </div>
@@ -42,10 +86,10 @@ const ProductId = () => {
                     <div className='border'>
                         <Image src={Hamlet3} alt='hamlet image' width={75} height={75}/>
                     </div>
-                </div>
+                </div> */}
 
                 <div className='border h-fit'>
-                    <Image src={Hamlet} alt='Hamlet' width={392} height={392} className='max-md:w-[250px]'/>
+                    <Image src={`http://127.0.0.1:8000/${productData.image}`} alt='Hamlet' width={392} height={392} className='max-md:w-[250px]'/>
                 </div>
 
                 </div>
@@ -64,7 +108,7 @@ const ProductId = () => {
                     <li>ویژگی‌های کلاه ایمنی : قابلیت گردش هوا</li>
                 </ul>
 
-                <p className='text-customYellow text-[20px] my-4'>۷۰,۰۰۰ <span className='text-customGray text-[14px]'>تومان</span></p>
+                <p className='text-customYellow text-[20px] my-4'>{productData.price}<span className='text-customGray text-[14px] mr-2'>تومان</span></p>
 
                 <div className='mt-5 w-[250px] flex justify-between'>
                     رنگ
@@ -84,9 +128,9 @@ const ProductId = () => {
                             <button onClick={() => setCount((prev) => (prev > 1 ? prev - 1 : prev))} className='bg-red-500 px-4 text-[22px] text-white rounded-md'>-</button>
                         </div>
                         <div>
-                            <Link href={'/cart'}>
-                            <button className='bg-blue-500 text-white px-4 py-2 rounded-md mr-12 text-[16px] max-[700px]:mr-0 max-[700px]:mt-2'>افزودن به سبد خرید</button>
-                            </Link>
+                            {/* <Link href={'/cart'}> */}
+                            <button onClick={addToCart} className='bg-blue-500 text-white px-4 py-2 rounded-md mr-12 text-[16px] max-[700px]:mr-0 max-[700px]:mt-2'>افزودن به سبد خرید</button>
+                            {/* </Link> */}
                         </div>
                 </div>
 
