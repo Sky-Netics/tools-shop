@@ -2,9 +2,9 @@
 
 import { useParams } from 'next/navigation'
 import Image from 'next/image'
-import Hamlet from '../../../../../public/assets/tools/Hamlet.webp'
-import Hamlet2 from '../../../../../public/assets/Helmet2.webp'
-import Hamlet3 from '../../../../../public/assets/Helmet3.webp'
+// import Hamlet from '../../../../../public/assets/tools/Hamlet.webp'
+// import Hamlet2 from '../../../../../public/assets/Helmet2.webp'
+// import Hamlet3 from '../../../../../public/assets/Helmet3.webp'
 import Tick from '../../../../../public/assets/tick.svg'
 import exclamationMark from '../../../../../public/exclamation-mark.svg'
 import truck from '../../../../../public/truck.svg'
@@ -32,7 +32,6 @@ const ProductId = () => {
                     throw new Error('it doesnt work')
                 }
                 setProductData(data)
-                window.location.href = '/cart'
                 console.log(data)
             })
     }, [])
@@ -53,8 +52,8 @@ async function addToCart() {
         if (!response.ok) {
             throw new Error(`Error: ${response.status} ${response.statusText}`);
         }
-        
         const data = await response.json();
+        window.location.href = '/cart'
         console.log(data);
     } catch (error) {
         console.error('Error adding to cart:', error);
