@@ -15,8 +15,7 @@ This is an e-commerce website built using Next.js for a tools shop. The website 
 
 - **Next.js**: Framework for building server-side rendered React applications.
 - **React**: JavaScript library for building user interfaces.
-- **CSS/SCSS**: Styling using modern CSS techniques.
-- **Tailwind CSS** (optional): Utility-first CSS framework for rapid UI development.
+- **Tailwind CSS** : Utility-first CSS framework for rapid UI development.
 
 ## Installation
 
