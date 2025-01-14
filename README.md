@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tools Shop Website
 
-## Getting Started
+This is an e-commerce website built using Next.js for a tools shop. The website allows users to browse, search, and purchase various tools. It features a modern, responsive UI, and is optimized for performance.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **Product Listing**: Display of tools with detailed information, prices, and images.
+- **Product Search**: Users can search for tools by name or category.
+- **Responsive Design**: The website is fully responsive and works seamlessly on desktop, tablet, and mobile devices.
+- **Shopping Cart**: Users can add tools to their cart and proceed to checkout.
+- **Checkout Process**: Includes user details, payment integration (or placeholder), and order confirmation.
+- **Admin Panel**: Allows admin users to manage products, categories, and orders (if applicable).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Technologies Used
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Next.js**: Framework for building server-side rendered React applications.
+- **React**: JavaScript library for building user interfaces.
+- **CSS/SCSS**: Styling using modern CSS techniques.
+- **Tailwind CSS** (optional): Utility-first CSS framework for rapid UI development.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Installation
 
-## Learn More
+To run the project locally, follow the steps below:
 
-To learn more about Next.js, take a look at the following resources:
+### Prerequisites
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Node.js (version >=14.x)
+- npm or yarn (preferably npm)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Steps
 
-## Deploy on Vercel
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/yourusername/tools-shop.git
+    cd tools-shop
+    ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install Dependencies**:
+    ```bash
+    npm install
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    Or if you're using Yarn:
+    ```bash
+    yarn install
+    ```
+
+3. **Run the code**:
+   ```bash
+    npm run dev
+    ```
+   
+4. **Open the Website**:
+Open `http://localhost:3000` in your browser.
