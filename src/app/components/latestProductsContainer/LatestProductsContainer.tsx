@@ -57,7 +57,7 @@ const LatestProductsContainer = () =>{
 
             </div>
 
-            <div className="flex gap-3 my-3">
+            <div className="my-3 text-red-500 text-center">
                 هیچ محصولی یافت نشد
             </div>
 
@@ -87,7 +87,7 @@ const LatestProductsContainer = () =>{
                 </Link>
           ))
         )}
-            </div>
+          </div>
 
         </div>
     )
