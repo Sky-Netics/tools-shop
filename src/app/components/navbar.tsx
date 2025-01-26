@@ -28,25 +28,49 @@ const Navbar = () => {
                 </Link>
             </div>
             <div className="hidden w-[500px] mr-2 lg:flex">
-                <div className="relative w-full">
+                <div className="relative w-full flex">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-1/2 -translate-y-1/2 right-1">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
-                    <input className="w-full h-full mr-7 pr-2 focus:outline-none" placeholder="دنبال چی میگردی" type="text" name="" id="" />
+
+                    <form
+                        onSubmit={(e) => {
+                            e.preventDefault();
+                            const query = e.target.search.value;
+                            if (query) {
+                            window.location.href = `/search?query=${query}`;
+                            }
+                        }}
+                        className="w-full"
+                        >
+                        <input
+                            type="text"
+                            name="search"
+                            placeholder="جستجو کنید..."
+                            className="w-full h-full mr-7 pr-2 focus:outline-none"
+                        />
+                    </form>
+
+                    {/* <input className="w-full h-full mr-7 pr-2 focus:outline-none" placeholder="دنبال چی میگردی" type="text" name="" id="" /> */}
                 </div>
             </div>
             <div className="flex items-center gap-5 mr-auto ml-4 lg:border-r-2 lg:pr-2">
+                <Link href={'/login'}>
+
                 <div className="flex items-center gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
                     <p>حساب کاربری</p>
                 </div>
+
+                </Link>
                 <div className="gap-2 hidden sm:flex items-center">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
+                    {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
                     </svg>
-                    <p>مورد علاقه</p>
+                    <p>مورد علاقه</p> */}
+                    <p>درباره ما</p>
                 </div>
 
                 <Link href={'/cart'}>

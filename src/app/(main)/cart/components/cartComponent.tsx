@@ -10,39 +10,42 @@ const CartComponent = () =>{
     const [cartList, setCartList] = useState([])
     const [items, setItems] = useState([])
 
-    useEffect(()=>{
+    useEffect(() => {
         fetch('http://127.0.0.1:8000/usercart/cart/', {
             cache: 'no-store'
         })
-        .then((res)=> res.json())
+        .then((res) => res.json())
         .then((data) => {
-            console.log(data)
-            setCartList(data)
-            setItems(data[0].items)
+            if (data.length > 0 && data[0].items) {
+                setCartList(data);
+                setItems(data[0].items);
+            } else {
+                setCartList([]);
+                setItems([]);
+            }
         })
-    }, [])
-
+        .catch((error) => console.error('Error fetching cart:', error));
+    }, []);
+    
+    
     async function DeleteItem(id) {
         try {
-            const response = await fetch(`http://127.0.0.1:8000/usercart/cart/add/${id}/`, {
+            const response = await fetch(`http://127.0.0.1:8000/usercart/cart/remove/${id}/`, {
                 method: 'DELETE',
                 headers: {
-                    'Content-Type': 'application/json', 
+                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${localStorage.getItem("access")}`
                 },
-                body: JSON.stringify({ product_id: id }),
                 cache: 'no-store'
             });
-            
+    
             if (!response.ok) {
                 throw new Error(`Error: ${response.status} ${response.statusText}`);
             }
-            
-            const data = await response.json();
-            window.location.reload()
-            console.log(data);
+    
+            setItems((prevItems) => prevItems.filter((item) => item.id !== id));
         } catch (error) {
-            console.error('Error adding to cart:', error);
+            console.error('Error deleting item:', error);
         }
     }
     

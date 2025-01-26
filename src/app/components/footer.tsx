@@ -1,11 +1,7 @@
-import MobileFooter from "./mobileFooter";
 
 const Footer = () => {
     return ( 
         <div>
-            <div className="sm:hidden">
-                <MobileFooter />
-            </div>
             <div className="px-4 py-10 xl:px-20 mt-16 bg-gray-100 text-sm">
                 <div className="md:flex justify-between items-center gap-4">
                     <div className="pb-6 md:w-2/3">
