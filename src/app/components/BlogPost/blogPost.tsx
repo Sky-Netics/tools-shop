@@ -1,25 +1,39 @@
 import Image from "next/image"
-import blogIamge from '../../../../public/assets/blog-image.webp'
 import LeftArrow from '../../../../public/left-arrow.svg'
+import Link from "next/link"
 
-const BlogPost = () => {
+type PostsType = {
+    id: number,
+    title: string,
+    description: string,
+    image: string,
+    date: string
+}
+
+
+
+const BlogPost = ({post}: {post: PostsType}) => {
     return(
         <div className="w-[300px] h-[300px] border py-4 px-4 rounded-lg">
             
             <div className="w-full flex justify-center">
-            <Image src={blogIamge} alt="blog image" width={265} height={163} className="rounded-lg"/>
+                <Link href={`/blog/${post.id}`}>
+                    <Image src={post.image} alt="blog image" width={280} height={100} className="rounded-lg" style={{ objectFit: 'cover', height: '180px' }}/>
+                </Link>
             </div>
 
             <div className="mt-4">
-                <h1>بهترین مارک آچار فرانسه در سال ۲۰۲۳</h1>
+                <h1>{post.title}</h1>
             </div>
 
             <div className="flex items-center justify-between py-3 max-sm:flex-col">
+                <Link href={`/blog/${post.id}`}>
                 <button className="bg-customYellow px-6 py-1 rounded-lg flex items-center gap-2 transition hover:bg-[#ffde39]">
                     خواندن
                     <Image src={LeftArrow} alt="Left arrow" width={15} height={15}/>
                 </button>
-                <h1 className="text-customGray text-[14px] max-sm:mt-5">19/10/1403</h1>
+                </Link>
+                <h1 className="text-customGray text-[14px] max-sm:mt-5">{post.date}</h1>
             </div>
         </div>
     )

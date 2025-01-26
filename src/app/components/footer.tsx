@@ -2,7 +2,7 @@
 const Footer = () => {
     return ( 
         <div>
-            <div className="px-4 py-10 xl:px-20 mt-16 bg-gray-100 text-sm">
+            <div className="px-4 py-10 xl:px-20  bg-gray-100 text-sm">
                 <div className="md:flex justify-between items-center gap-4">
                     <div className="pb-6 md:w-2/3">
                         <p className="font-bold pb-1">فروشگاه ابزارالات</p>
