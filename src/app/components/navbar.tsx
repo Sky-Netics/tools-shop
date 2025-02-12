@@ -1,10 +1,14 @@
 'use client'
 
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useRef, useState } from "react"
+
 import NavItems from "./navItems";
 import RightBarItems from "./rightBarItems";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+
+import logo from "../../../public/assets/logo.png";
 
 const Navbar = () => {
     const router = useRouter();
@@ -12,6 +16,7 @@ const Navbar = () => {
     const rigthBar = useRef<HTMLDivElement|null>(null);
     const placeholder = useRef<HTMLDivElement|null>(null);
     const searchQ = useRef<HTMLInputElement|null>(null);
+    const loginCart = useRef<HTMLDivElement|null>(null);
 
     const openBar = ()=>{
         if (rigthBar.current)
@@ -35,12 +40,30 @@ const Navbar = () => {
             router.push(`/search?query=${searchQ.current.value}`)
         }
     }
+    const handleMouseEnter = ()=>{
+        loginCart.current?.classList.remove("hidden");
+        setTimeout(()=>{
+            if (loginCart.current){
+                loginCart.current.style.opacity = "1";
+                loginCart.current.style.top = "36px";
+            }
+        },50)
+    }
+    const handleMouseLeave = ()=>{
+        if (loginCart.current){
+            loginCart.current.style.top = "64px";
+            loginCart.current.style.opacity = "0";
+            setTimeout(()=>{
+                loginCart.current?.classList.add("hidden");
+            },150)
+        }
+    }
 
     return (<>
         <div className="layout flex text-gray-600 flex-col gap-8 lg:flex-row px-2 pt-5 text-sm">
             <div>
                 <Link href={'/'}>
-                    <img className="object-cover" src="https://demos.mahdisweb.net/tools/wp-content/uploads/2023/12/h8-logo.png" alt="" />
+                    <Image className="w-16 h-16 object-cover" src={logo} width={100} height={100} alt="logo" />
                 </Link>
             </div>
             <div className="hidden w-[500px] lg:flex">
@@ -49,21 +72,44 @@ const Navbar = () => {
                       <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
                     <form onSubmit={e=>submitForm(e)}>
-                        <input ref={searchQ} className="w-full h-full mr-7 pr-2 focus:outline-none" placeholder="دنبال چی میگردی" type="text" name="" id="" />
+                        <input ref={searchQ} className="w-full h-full mr-7 pr-2 focus:outline-none" placeholder="دنبال چی میگردی" type="text" />
                     </form>
                 </div>
             </div>
             <div className="flex items-center gap-5 mr-auto ml-4 lg:border-r-2 lg:pr-2">
-                <Link href={'/login'}>
-
-                <div className="flex items-center gap-2">
+                <div onMouseLeave={handleMouseLeave} onMouseEnter={handleMouseEnter} className="flex items-center relative gap-2">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
-                    <p>حساب کاربری</p>
-                </div>
-
-                </Link>
+                    <Link href="/login">
+                        <p>حساب کاربری</p>
+                    </Link>
+                    <div ref={loginCart} style={{top:"64px",opacity:0}} className="hidden absolute w-64 duration-150 left-1/2 -translate-x-1/2 bg-white customShadow p-4">
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-0 h-0 border-b-white border-x-transparent border-l-[10px] border-r-[10px] border-b-[20px]"></div>
+                        <div className="flex items-end justify-between">
+                            <p className="text-lg font-bold">ورود</p>
+                            <Link href="/sign-up" className="text-nowrap text-customYellow">ایجاد حساب کاربری</Link>
+                        </div>
+                        <hr />
+                        <div className="py-4">
+                            <div className="mt-3">
+                                <p className="font-bold">نام کاربری یا آدرس ایمیل</p>
+                                <div>
+                                    <input className="w-full outline-customYellow border h-10 rounded-lg mt-1" type="text" />
+                                </div>
+                            </div>
+                            <div className="mt-3">
+                                <p className="font-bold">رمز عبور</p>
+                                <div>
+                                    <input className="w-full outline-customYellow border h-10 rounded-lg mt-1" type="password" />
+                                </div>
+                            </div>
+                            <div className="flex-center mt-6">
+                                <button className="bg-customYellow text-white py-2 px-16 rounded-lg hover:opacity-85">ورود</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>            
                 <div className="gap-2 hidden sm:flex items-center">
                     {/* <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />

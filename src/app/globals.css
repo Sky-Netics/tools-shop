@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: iransans;
+  src: url(../../public/fonts/Iranian\ Sans.ttf);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -15,8 +20,11 @@
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
-  /* overflow-x: hidden; */
+  font-family: iransans;
+}
+.customShadow{
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4),
+              -5px -5px 10px rgba(0, 0, 0, 0.1); 
 }
 
 
