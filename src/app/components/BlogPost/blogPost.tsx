@@ -1,8 +1,10 @@
-import Image from "next/image"
-import LeftArrow from '../../../../public/left-arrow.svg'
 import Link from "next/link"
+import Image from "next/image"
 
-type PostsType = {
+import LeftArrow from '../../../../public/left-arrow.svg'
+
+
+interface PostsType{
     id: number,
     title: string,
     description: string,
@@ -14,16 +16,18 @@ type PostsType = {
 
 const BlogPost = ({post}: {post: PostsType}) => {
     return(
-        <div className="w-[300px] h-[300px] border py-4 px-4 rounded-lg">
-            
-            <div className="w-full flex justify-center">
+        <div className="flex flex-col w-fit mx-auto justify-between border py-4 px-4 rounded-lg">
+
+            <div className="w-fit flex justify-center overflow-hidden relative">
                 <Link href={`/blog/${post.id}`}>
-                    <Image src={post.image} alt="blog image" width={280} height={100} className="rounded-lg" style={{ objectFit: 'cover', height: '180px' }}/>
+                    <Image className="rounded-md rounded-bl-3xl w-full object-cover h-48" src={post.image} alt="blog image" width={280} height={100} />
+                    <div className="absolute rounded rounded-bl-3xl -top-4 -left-4 -right-4 -bottom-4 border-[16px]
+                    hover:-bottom-0 hover:-left-0 hover:-right-0 hover:-top-0 duration-300 border-[rgba(255,255,255,0.7)]"></div>
                 </Link>
             </div>
 
             <div className="mt-4">
-                <h1>{post.title}</h1>
+                <p>{post.title}</p>
             </div>
 
             <div className="flex items-center justify-between py-3 max-sm:flex-col">

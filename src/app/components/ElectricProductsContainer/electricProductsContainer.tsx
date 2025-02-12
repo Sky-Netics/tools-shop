@@ -1,38 +1,26 @@
 import Link from "next/link";
 import ElectricProduct from "../Product/Product";
+import { getData } from "@/app/actions/getData";
+import { Products } from "@/app/interfaces/products";
+import { BACKEND_DOMAIN } from "@/app/backDomain";
 
-async function fetchProducts() {
-  const res = await fetch('http://127.0.0.1:8000/store/products/', {
-    cache: 'no-store',
-  });
-
-  if (!res.ok) {
-    throw new Error('Failed to fetch offer products');
-  }
-  return res.json();
-}
 
 export default async function ElectricProductsContainer() {
-  let products = [];
-  let error = null;
-
-  try {
-    products = await fetchProducts();
-  } catch (err) {
-    error = err.message;
-  }
+  const products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`);
+  
+  
 
   return (
-    <div className="mx-[150px] mb-10 max-md:mx-[50px] overflow-hidden max-sm:mx-[10px]">
+    <div className="px-6 pb-6 max-w-[1250px] mx-auto">
       <div className="flex">
-        <div className="flex">
-          <svg className="pack-fontawesome w-[25px] h-[25px] ml-2" viewBox="0 0 576 512">
-            {/* SVG Path */}
+        <div className="text-nowrap flex gap-2">
+          <svg className="size-6" viewBox="0 0 576 512">
+            <path xmlns="http://www.w3.org/2000/svg" d="M128 16c0-8.8-7.2-16-16-16s-16 7.2-16 16v96h32V16zm160 0c0-8.8-7.2-16-16-16s-16 7.2-16 16v96h32V16zM16 144c-8.8 0-16 7.2-16 16s7.2 16 16 16H32v64c0 83 63.1 151.2 144 159.2V496c0 8.8 7.2 16 16 16s16-7.2 16-16V399.2c17.3-1.7 33.7-6.2 48.9-12.9c-.6-6-.9-12.1-.9-18.3c0-6 .3-11.8 .9-17.6c-19 11.2-41.2 17.6-64.9 17.6c-70.7 0-128-57.3-128-128V176H320v56.2c9.8-8.1 20.6-15.2 32-21V176h16c8.8 0 16-7.2 16-16s-7.2-16-16-16H352 320 64 32 16zM320 368a112 112 0 1 1 224 0 112 112 0 1 1 -224 0zm256 0a144 144 0 1 0 -288 0 144 144 0 1 0 288 0zm-96.1-81c-4.3-3.7-10.6-4-15.1-.6l-96 72c-4.1 3.1-5.8 8.5-4.2 13.4s6.2 8.2 11.4 8.2h35.6l-30.1 54.2c-2.8 5-1.7 11.1 2.6 14.9s10.6 4 15.1 .6l96-72c4.1-3.1 5.8-8.5 4.2-13.4s-6.2-8.2-11.4-8.2H452.4l30.1-54.2c2.8-5 1.7-11.1-2.6-14.9z"></path>
           </svg>
-          <h1>ابزار برقی و شارژی</h1>
+          <p>ابزار برقی و شارژی</p>
         </div>
         <div className="w-[75%] border border-dashed border-[#b6b6b6] h-0 mt-3 mr-5" />
-        <div className="mr-3 py-1 w-[200px]">
+        <div className="mr-3 py-1 whitespace-nowrap">
           <Link className="flex items-center" href={'/'}>
             <div className="bg-customYellow rounded-[50%] w-4 h-4">
               <svg className="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
@@ -44,23 +32,17 @@ export default async function ElectricProductsContainer() {
         </div>
       </div>
 
-      {/* نمایش ارور در صورت بروز خطا */}
-      {error && (
-        <div className="text-red-500 py-2 text-center">
-          هیچ محصولی یافت نشد
-        </div>
-      )}
-
-      {/* نمایش محصولات در صورت موفقیت */}
       <div className="flex py-3 gap-4">
-        {products.length > 0 ? (
+        {typeof products !== "string" ? (
           products.map((product: any, index: number) => (
             <Link href={`products/${product.id}`} key={index}>
-              <ElectricProduct title={product.name} price={product.price} image={product.image} id={product.id} />
+              <ElectricProduct description="" name={product.name} price={product.price} image={product.image} id={product.id} />
             </Link>
           ))
         ) : (
-          <div></div>
+          <div className="text-red-500 mx-auto">
+            {products}
+          </div>
         )}
       </div>
     </div>

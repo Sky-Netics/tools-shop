@@ -19,11 +19,15 @@ body {
   /* overflow-x: hidden; */
 }
 
+
 @layer components{
   .layout{
     @apply max-w-[1300px] mx-auto
   }
   .flex-center{
     @apply flex justify-center items-center
+  }
+  .hide-last-two-mb > :nth-last-child(-n+2) {
+    @apply hidden;
   }
 }

@@ -1,13 +1,17 @@
 'use client'
 
-import { useRef, useState } from "react"
+import React, { useRef, useState } from "react"
 import NavItems from "./navItems";
 import RightBarItems from "./rightBarItems";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
+    const router = useRouter();
+
     const rigthBar = useRef<HTMLDivElement|null>(null);
     const placeholder = useRef<HTMLDivElement|null>(null);
+    const searchQ = useRef<HTMLInputElement|null>(null);
 
     const openBar = ()=>{
         if (rigthBar.current)
@@ -20,38 +24,33 @@ const Navbar = () => {
         placeholder.current?.classList.add("hidden");
     }
 
+    const submitSearch = ()=>{
+        if (searchQ.current){
+            router.push(`/search?query=${searchQ.current.value}`)
+        }
+    }
+    const submitForm = (e:React.FormEvent<HTMLFormElement>)=>{
+        e.preventDefault();
+        if (searchQ.current){
+            router.push(`/search?query=${searchQ.current.value}`)
+        }
+    }
+
     return (<>
-        <div className="layout flex text-gray-600 flex-col lg:flex-row px-2 pt-5 text-sm">
+        <div className="layout flex text-gray-600 flex-col gap-8 lg:flex-row px-2 pt-5 text-sm">
             <div>
                 <Link href={'/'}>
-                <img className="object-cover" src="https://demos.mahdisweb.net/tools/wp-content/uploads/2023/12/h8-logo.png" alt="" />
+                    <img className="object-cover" src="https://demos.mahdisweb.net/tools/wp-content/uploads/2023/12/h8-logo.png" alt="" />
                 </Link>
             </div>
-            <div className="hidden w-[500px] mr-2 lg:flex">
+            <div className="hidden w-[500px] lg:flex">
                 <div className="relative w-full flex">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 absolute top-1/2 -translate-y-1/2 right-1">
+                    <svg onClick={submitSearch} className="cursor-pointer size-5 absolute top-1/2 -translate-y-1/2 right-1" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
                     </svg>
-
-                    <form
-                        onSubmit={(e) => {
-                            e.preventDefault();
-                            const query = e.target.search.value;
-                            if (query) {
-                            window.location.href = `/search?query=${query}`;
-                            }
-                        }}
-                        className="w-full"
-                        >
-                        <input
-                            type="text"
-                            name="search"
-                            placeholder="جستجو کنید..."
-                            className="w-full h-full mr-7 pr-2 focus:outline-none"
-                        />
+                    <form onSubmit={e=>submitForm(e)}>
+                        <input ref={searchQ} className="w-full h-full mr-7 pr-2 focus:outline-none" placeholder="دنبال چی میگردی" type="text" name="" id="" />
                     </form>
-
-                    {/* <input className="w-full h-full mr-7 pr-2 focus:outline-none" placeholder="دنبال چی میگردی" type="text" name="" id="" /> */}
                 </div>
             </div>
             <div className="flex items-center gap-5 mr-auto ml-4 lg:border-r-2 lg:pr-2">

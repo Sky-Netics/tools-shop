@@ -5,19 +5,19 @@ import banner2 from '../../../../public/assets/banner-ss2.png'
 
 const SliderContainer = () => {
     return ( 
-        <div className="mx-[150px] my-6 h-fit flex max-xl:mx-[30px] max-[890px]:flex-col">
-            <div className="w-[940px] ml-4 max-[890px]:w-[100%] max-[890px]:mb-5 flex">
+        <div className="flex justify-center gap-4 max-lg:flex-col py-10 px-6 max-sm:px-2 max-sm:py-6">
+            <div className="">
                 <Slider/>
             </div>
             
-        <div className="flex flex-col gap-2 justify-between max-[890px]:flex-row">
+        <div className="flex flex-col max-lg:flex-row justify-center gap-2">
 
-            <div className="w-[300px] h-[193px] rounded-md max-lg:h-[145px]">
-                <Image src={banner1} alt="banner1 image" className="h-full object-cover rounded-md"/> 
+            <div className="rounded-md">
+                <Image src={banner1} alt="banner1 image" className="h-fit w-full object-cover rounded-md"/> 
             </div>
 
-            <div className="w-[300px] h-[193px] rounded-md max-lg:h-[145px]">
-                <Image src={banner2} alt="banner2 image" className="h-full object-cover rounded-md"/>
+            <div className="rounded-md">
+                <Image src={banner2} alt="banner2 image" className="h-fit w-full object-cover rounded-md"/>
             </div>
 
             </div>
