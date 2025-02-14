@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "../components/navbar";
 import Footer from "../components/footer";
+import Alert from "../components/alert";
 
 
 
@@ -18,6 +19,7 @@ export default function RootLayout({
     <html dir="rtl" lang="fa">
       <body>
         <Navbar/>
+        <Alert />
         {children}
         <Footer/>
       </body>

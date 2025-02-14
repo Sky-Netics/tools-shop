@@ -21,12 +21,37 @@
 
 body {
   font-family: iransans;
+  overflow-x: hidden;
 }
 .customShadow{
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4),
               -5px -5px 10px rgba(0, 0, 0, 0.1); 
 }
-
+#priceRange{
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  background: linear-gradient(to left, #fdcf07 50%, #ddd 50%);
+  outline: none;
+  opacity: 0.7;
+  transition: opacity .2s;
+}
+#priceRange::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 5px;
+  height: 20px;
+  background: #fdcf07;
+  cursor: pointer;
+  border-radius: 0%;
+}
+#priceRange::-moz-range-thumb {
+  width: 5px;
+  height: 20px;
+  background: #fdcf07;
+  cursor: pointer;
+  border-radius: 0%;
+}
 
 @layer components{
   .layout{

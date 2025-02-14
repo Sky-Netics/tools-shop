@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const NavItems = () => {
 
     const navItemHover = (id:string,action:string)=>{
@@ -32,13 +34,13 @@ const NavItems = () => {
             <div id="sizeTool" style={{opacity:0,top:"64px"}}
                 className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
-                <a href="/" className="hover:text-yellow-500">تراز دستی</a>       
-                <a href="/" className="hover:text-yellow-500">تراز لیزری</a>
-                <a href="/" className="hover:text-yellow-500">خط کش</a>
-                <a href="/" className="hover:text-yellow-500">دماسنج</a>
-                <a href="/" className="hover:text-yellow-500">گونیا</a>
-                <a href="/" className="hover:text-yellow-500">متر دستی</a>
-                <a href="/" className="hover:text-yellow-500">متر لیزری </a> 
+                <Link href="/products" className="hover:text-yellow-500">تراز دستی</Link>       
+                <Link href="/products" className="hover:text-yellow-500">تراز لیزری</Link>
+                <Link href="/products" className="hover:text-yellow-500">خط کش</Link>
+                <Link href="/products" className="hover:text-yellow-500">دماسنج</Link>
+                <Link href="/products" className="hover:text-yellow-500">گونیا</Link>
+                <Link href="/products" className="hover:text-yellow-500">متر دستی</Link>
+                <Link href="/products" className="hover:text-yellow-500">متر لیزری </Link> 
             </div>
         </div>
         <div onMouseEnter={()=>{navItemHover("fuelTool","open")}} onMouseLeave={()=>navItemHover("fuelTool","close")} className="relative">
@@ -71,11 +73,11 @@ const NavItems = () => {
             <div id="charging" style={{opacity:0,top:"64px"}}
                 className={`bg-white absolute flex-col transition-all flex z-20
                 border-t-2 space-y-1 border shadow rounded border-t-yellow-400 w-40 p-2`}>
-                <a href="/" className="hover:text-yellow-400">اتو</a>
-                <a href="/" className="hover:text-yellow-400">پولیش</a>
-                <a href="/" className="hover:text-yellow-400">دریل</a>
-                <a href="/" className="hover:text-yellow-400">سشوار</a>
-                <a href="/" className="hover:text-yellow-400">فرز</a>
+                <Link href="/products" className="hover:text-yellow-400">اتو</Link>
+                <Link href="/products" className="hover:text-yellow-400">پولیش</Link>
+                <Link href="/products" className="hover:text-yellow-400">دریل</Link>
+                <Link href="/products" className="hover:text-yellow-400">سشوار</Link>
+                <Link href="/products" className="hover:text-yellow-400">فرز</Link>
             </div>
         </div>
         <div onMouseEnter={()=>{navItemHover("cutting","open")}} onMouseLeave={()=>navItemHover("cutting","close")} className="relative">

@@ -6,12 +6,12 @@ import { BACKEND_DOMAIN } from "@/app/backDomain";
 
 
 export default async function ElectricProductsContainer() {
-  const products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`);
+  let products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`);
   
-  
+  products = products.slice(0,6);
 
   return (
-    <div className="px-6 pb-6 max-w-[1250px] mx-auto">
+    <div className="max-xl:px-6 pb-6 max-w-[1400px] mx-auto overflow-x-hidden">
       <div className="flex">
         <div className="text-nowrap flex gap-2">
           <svg className="size-6" viewBox="0 0 576 512">
@@ -32,7 +32,7 @@ export default async function ElectricProductsContainer() {
         </div>
       </div>
 
-      <div className="flex py-3 gap-4">
+      <div className="flex flex-wrap justify-center max-md:grid grid-cols-2 max-md:hide-last-two-mb gap-2 my-3">
         {typeof products !== "string" ? (
           products.map((product: any, index: number) => (
             <Link href={`products/${product.id}`} key={index}>

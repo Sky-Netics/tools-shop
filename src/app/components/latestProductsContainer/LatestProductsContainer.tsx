@@ -7,10 +7,14 @@ import { getData } from "@/app/actions/getData";
 import { BACKEND_DOMAIN } from "@/app/backDomain";
 
 const LatestProductsContainer = async () =>{
-    const products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`)
+    let products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`)
+
+    if (typeof products !== "string"){
+        products = products.slice(0,6).reverse();
+    }
 
     return(
-        <div className="max-w-[1250px] mx-auto p-6 ">
+        <div className="max-w-[1400px] mx-auto py-6 max-xl:px-6 max-md:px-2 overflow-x-hidden">
 
             <div className="flex items-center gap-7">
                 <div className="flex items-center text-nowrap gap-1">
@@ -20,7 +24,7 @@ const LatestProductsContainer = async () =>{
                 <hr className="w-full border-dashed border-[#b6b6b6]"/>
             </div>
 
-            <div className="flex gap-3 my-3">
+            <div className="flex flex-wrap justify-center max-md:grid grid-cols-2 max-md:hide-last-two-mb gap-2 my-3">
               {typeof products !== "string" ? 
               products.map((product,index) => (
                   <Link href={`/products/${product.id}`} key={index}>

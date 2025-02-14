@@ -8,7 +8,9 @@ import { Products } from '@/app/interfaces/products';
 
 
 export default async function OfferProducts() {
-    const products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`);
+    let products:Products[]|string = await getData(`${BACKEND_DOMAIN}/store/products/`);
+
+    products = products.slice(0,6)
 
     return (
       <div className='mx-6'>
@@ -18,7 +20,7 @@ export default async function OfferProducts() {
           </div>
 
           <div className="h-full w-full py-7 flex justify-center">
-            <div dir='ltr' id='discountContainer' className="bg-white h-full w-[80%] scroll-smooth max-lg:w-full max-lg:mx-8 flex overflow-hidden">
+            <div dir='ltr' id='discountContainer' className="bg-white h-full w-[75%] mr-24 ml-auto scroll-smooth max-lg:w-full max-lg:mx-8 flex overflow-hidden">
               {typeof products !== "string" ? (
                 products.map((product, index) => (
                   <OfferProduct

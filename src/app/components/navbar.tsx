@@ -32,12 +32,14 @@ const Navbar = () => {
     const submitSearch = ()=>{
         if (searchQ.current){
             router.push(`/search?query=${searchQ.current.value}`)
+            searchQ.current.value = ""
         }
     }
     const submitForm = (e:React.FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         if (searchQ.current){
             router.push(`/search?query=${searchQ.current.value}`)
+            searchQ.current.value = ""
         }
     }
     const handleMouseEnter = ()=>{
@@ -60,7 +62,7 @@ const Navbar = () => {
     }
 
     return (<>
-        <div className="layout flex text-gray-600 flex-col gap-8 lg:flex-row px-2 pt-5 text-sm">
+        <div className="layout flex text-gray-600 gap-8 px-2 pt-5 text-sm">
             <div>
                 <Link href={'/'}>
                     <Image className="w-16 h-16 object-cover" src={logo} width={100} height={100} alt="logo" />

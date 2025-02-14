@@ -5,9 +5,9 @@ import Image from "next/image";
 
 const Product = ({name, price, image, id , description}:Products) => {
     return(
-            <div className="w-[197px] h-full border flex flex-col justify-between p-3">
+            <div className="w-56 max-md:w-full h-full border flex flex-col justify-between p-3">
                 <div>
-                    <Image className="h-40 object-cover w-full" src={BACKEND_DOMAIN + image} width={180} height={180} alt="tool image"/>
+                    <Image className="h-40 max-md:h-60 max-sm:h-40 object-cover w-full" src={BACKEND_DOMAIN + image} width={180} height={180} alt="tool image"/>
                 </div>
                 <div>
                     <span className="text-customYellow">{price}</span>
