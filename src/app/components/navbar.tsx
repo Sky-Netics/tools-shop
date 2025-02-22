@@ -3,20 +3,44 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import React, { useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 
 import NavItems from "./navItems";
 import RightBarItems from "./rightBarItems";
+import { LoginFetch } from "../actions/authentication";
+import { useText,useVisible } from '@/app/store/alerts';
+import { authResponseProps } from "../interfaces/authResponse";
 
 import logo from "../../../public/assets/logo.png";
+import { BACKEND_DOMAIN } from "../backDomain";
+
 
 const Navbar = () => {
     const router = useRouter();
+
+    const { setText } = useText();
+    const { setVisible } = useVisible();
+    
+    const [total,setTotal] = useState(0);
 
     const rigthBar = useRef<HTMLDivElement|null>(null);
     const placeholder = useRef<HTMLDivElement|null>(null);
     const searchQ = useRef<HTMLInputElement|null>(null);
     const loginCart = useRef<HTMLDivElement|null>(null);
+
+    const username = useRef<HTMLInputElement|null>(null);
+    const password = useRef<HTMLInputElement|null>(null);
+
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const response = await fetch(`${BACKEND_DOMAIN}/usercart/cart/`)
+            if (response.ok){
+                const result = await response.json();
+                setTotal(result[0].item_count)
+            }
+        }
+        fetchData()
+    })
 
     const openBar = ()=>{
         if (rigthBar.current)
@@ -43,13 +67,16 @@ const Navbar = () => {
         }
     }
     const handleMouseEnter = ()=>{
-        loginCart.current?.classList.remove("hidden");
-        setTimeout(()=>{
-            if (loginCart.current){
-                loginCart.current.style.opacity = "1";
-                loginCart.current.style.top = "36px";
-            }
-        },50)
+        if (window.innerWidth > 624){
+
+            loginCart.current?.classList.remove("hidden");
+            setTimeout(()=>{
+                if (loginCart.current){
+                    loginCart.current.style.opacity = "1";
+                    loginCart.current.style.top = "36px";
+                }
+            },50)
+        }
     }
     const handleMouseLeave = ()=>{
         if (loginCart.current){
@@ -58,6 +85,23 @@ const Navbar = () => {
             setTimeout(()=>{
                 loginCart.current?.classList.add("hidden");
             },150)
+        }
+    }
+
+    const submitLogin = async ()=>{
+        if (password.current && username.current){
+            const result:authResponseProps|string = await LoginFetch(username.current.value,password.current.value);
+                    
+            if (typeof result !== "string" && result.access){
+                localStorage.setItem("access",result.access)
+                localStorage.setItem("refresh",result.refresh)
+                
+                router.push("/account")
+            }else{
+                setText(result)
+                setVisible(true)
+            }
+            handleMouseLeave();
         }
     }
 
@@ -83,7 +127,7 @@ const Navbar = () => {
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
-                    <Link href="/login">
+                    <Link href="/account">
                         <p>حساب کاربری</p>
                     </Link>
                     <div ref={loginCart} style={{top:"64px",opacity:0}} className="hidden absolute w-64 duration-150 left-1/2 -translate-x-1/2 bg-white customShadow p-4">
@@ -97,17 +141,17 @@ const Navbar = () => {
                             <div className="mt-3">
                                 <p className="font-bold">نام کاربری یا آدرس ایمیل</p>
                                 <div>
-                                    <input className="w-full outline-customYellow border h-10 rounded-lg mt-1" type="text" />
+                                    <input ref={username} className="w-full outline-customYellow border h-10 rounded-lg mt-1" type="text" />
                                 </div>
                             </div>
                             <div className="mt-3">
                                 <p className="font-bold">رمز عبور</p>
                                 <div>
-                                    <input className="w-full outline-customYellow border h-10 rounded-lg mt-1" type="password" />
+                                    <input ref={password} className="w-full outline-customYellow border h-10 rounded-lg mt-1" type="password" />
                                 </div>
                             </div>
                             <div className="flex-center mt-6">
-                                <button className="bg-customYellow text-white py-2 px-16 rounded-lg hover:opacity-85">ورود</button>
+                                <button onClick={submitLogin} className="bg-customYellow text-white py-2 px-16 rounded-lg hover:opacity-85">ورود</button>
                             </div>
                         </div>
                     </div>
@@ -128,7 +172,7 @@ const Navbar = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
                         </svg>
                         <div className="w-5 h-5 pt-1 rounded-full absolute -top-2 -left-3
-                        text-[10px] flex-center bg-gray-800 text-white">0</div>
+                        text-[10px] flex-center bg-gray-800 text-white">{total}</div>
                     </div>
                 </Link>
 

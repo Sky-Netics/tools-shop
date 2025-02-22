@@ -1,11 +1,20 @@
 'use client'
 
-import LoginFetch from "@/app/actions/login";
-import { authResponseProps } from "@/app/interfaces/authResponse";
 import Link from "next/link";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+
+import { useText,useVisible } from '@/app/store/alerts';
+import { LoginFetch } from "@/app/actions/authentication";
+import { authResponseProps } from "@/app/interfaces/authResponse";
+
 
 const PasswordField = () => {
+    const router = useRouter();
+
+    const { setText } = useText();
+    const { setVisible } = useVisible();
+
     const [password,setPassword] = useState("");
     const [showPassword,setShowPassword] = useState(false);
     const [processing,setProcessing] = useState(false);
@@ -14,22 +23,24 @@ const PasswordField = () => {
         setProcessing(true);
         const username = document.getElementById("username") as HTMLInputElement ;
 
-        const result:string[] = await LoginFetch(username.value,password);
-
-        if (result[0] !== "ok"){
-            const alert = document.getElementById("page-alert") as HTMLDivElement;
-            // use zustand
-            alert.style.display = "block";
+        const result:authResponseProps|string = await LoginFetch(username.value,password);
+        
+        if (typeof result !== "string" && result.access){
+            localStorage.setItem("access",result.access)
+            localStorage.setItem("refresh",result.refresh)
+            
+            router.push("/account")
         }else{
-            localStorage.setItem("access",result[0])
-            localStorage.setItem("refresh",result[1])
+            setText(result)
+            setVisible(true)
         }
+        
         setProcessing(false);
     }
 
-    return (<>
+    return (<> 
         <div className="relative w-full">
-            <label className="bg-white" htmlFor="password">رمز عبور</label>
+            <label className="bg-white font-bold" htmlFor="password">رمز عبور</label>
             <div className="flex relative mt-4">
                 <input
                     name="password"

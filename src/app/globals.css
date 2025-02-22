@@ -63,4 +63,7 @@ body {
   .hide-last-two-mb > :nth-last-child(-n+2) {
     @apply hidden;
   }
+  .active{
+    @apply border-customYellow border-r-4
+  }
 }

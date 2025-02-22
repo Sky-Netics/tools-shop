@@ -1,4 +1,3 @@
-import Link from "next/link";
 import PasswordField from "./_components/passwordField";
 
 const Login = () => {
@@ -6,7 +5,8 @@ const Login = () => {
 
     return ( 
         <div className="flex justify-center">
-            <div className="px-8 w-full max-w-[550px] mx-4 py-5 mt-10 rounded-lg shadow-xl text-customGray border">
+            <div className="px-8 w-full max-w-[550px] mx-4 py-5 mt-6 rounded-lg text-customGray">
+                <h1 className="text-2xl font-bold mb-8 text-center text-black">ورود</h1>
                 <div className="">
                     <div className="w-full mb-4">
                         <label className="bg-white" htmlFor="username">نام کاربری</label>

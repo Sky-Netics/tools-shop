@@ -8,9 +8,10 @@ import Telegram from '../../../../../public/telegram.svg'
 import getProductById from '@/app/actions/getDatabyId'
 import { Products } from '@/app/interfaces/products'
 import { BACKEND_DOMAIN } from '@/app/backDomain'
-import ProductDetailQ from '../_components/productDetailQ'
 import { getData } from '@/app/actions/getData'
 import Product from '@/app/components/Product/Product'
+import ProductQ from '../_components/productQ'
+import ProductAdd from '../_components/productAdd'
 
 
 interface ProductIdParams{
@@ -82,8 +83,8 @@ const ProductId = async ({params}:ProductIdParams) => {
                             </div>
 
                         </div>
-        
-                        <ProductDetailQ id={param.id}/>
+                        <ProductQ />
+                        <ProductAdd id={param.id}/>
 
                         <div className='flex max-md:flex-col max-md:items-end max-sm:flex-row my-4'>
                             <p>آیا قیمت مناسب تری سراغ دارید؟</p>
@@ -173,7 +174,7 @@ const ProductId = async ({params}:ProductIdParams) => {
                 <div className='flex flex-wrap justify-center max-md:grid grid-cols-2 max-md:hide-last-two-mb max-xl:gap-2 my-3'>
                     {typeof products !== "string" ? (
                         products.map((product: any, index: number) => (
-                            <Link href={`products/${product.id}`} key={index}>
+                            <Link href={`/products/${product.id}`} key={index}>
                             <Product description="" name={product.name} price={product.price} image={product.image} id={product.id} />
                         </Link>
                     ))

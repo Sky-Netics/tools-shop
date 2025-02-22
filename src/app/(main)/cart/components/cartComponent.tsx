@@ -3,58 +3,82 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import Hamlet from '../../../../../public/assets/tools/Hamlet.webp';
-import Delete from '../../../../../public/delete.svg';
+import minus from '../../../../../public/minus.svg';
+import plus from '../../../../../public/plus.svg';
+import { BACKEND_DOMAIN } from "@/app/backDomain";
+import { CartItmes } from "@/app/interfaces/cartItems";
+import addToCart from "@/app/actions/addToCart";
+import { useRouter } from "next/navigation";
+import { UserInfo } from "@/app/interfaces/userInfo";
+import { isUser, refreshUser } from "@/app/actions/isUser";
 
 const CartComponent = () =>{
+    const router = useRouter();
 
-    const [cartList, setCartList] = useState([])
-    const [items, setItems] = useState([])
+    const [items, setItems] = useState<CartItmes>()
+    const [refresh,setRefresh] = useState(false);
 
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/usercart/cart/', {
-            cache: 'no-store'
-        })
-        .then((res) => res.json())
-        .then((data) => {
-            if (data.length > 0 && data[0].items) {
-                setCartList(data);
-                setItems(data[0].items);
-            } else {
-                setCartList([]);
-                setItems([]);
+        const checkUser = async ()=>{
+            const result:UserInfo|number = await isUser();
+            if (typeof result === "number"){
+                if (result === 401){
+                    const refresh = await refreshUser();
+                    if (refresh === 200){
+                        return 0
+                    }else{
+                        router.push("/login")
+                    }
+                }
             }
-        })
-        .catch((error) => console.error('Error fetching cart:', error));
-    }, []);
-    
-    
-    async function DeleteItem(id) {
-        try {
-            const response = await fetch(`http://127.0.0.1:8000/usercart/cart/remove/${id}/`, {
-                method: 'DELETE',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${localStorage.getItem("access")}`
-                },
-                cache: 'no-store'
-            });
-    
-            if (!response.ok) {
-                throw new Error(`Error: ${response.status} ${response.statusText}`);
-            }
-    
-            setItems((prevItems) => prevItems.filter((item) => item.id !== id));
-        } catch (error) {
-            console.error('Error deleting item:', error);
         }
-    }
-    
+        checkUser()
+    }, []);
 
+    useEffect(()=>{
+        const fetchData = async ()=>{
+            const response = await fetch(`${BACKEND_DOMAIN}/usercart/cart/`)
+            if (response.ok){
+                const result = await response.json();
+                setItems(result[0])
+            }
+        }
+        fetchData()
+    },[refresh])
+    
+    
+    // async function DeleteItem(id) {
+    //     try {
+    //         const response = await fetch(`http://127.0.0.1:8000/usercart/cart/remove/${id}/`, {
+    //             method: 'DELETE',
+    //             headers: {
+    //                 'Content-Type': 'application/json',
+    //                 'Authorization': `Bearer ${localStorage.getItem("access")}`
+    //             },
+    //             cache: 'no-store'
+    //         });
+    
+    //         if (!response.ok) {
+    //             throw new Error(`Error: ${response.status} ${response.statusText}`);
+    //         }
+    
+    //         setItems((prevItems) => prevItems.filter((item) => item.id !== id));
+    //     } catch (error) {
+    //         console.error('Error deleting item:', error);
+    //     }
+    // }
+    
+    const plusItem = (id:number)=>{
+        addToCart(`${id}`)
+        setTimeout(()=>{
+            setRefresh(!refresh)
+        },300)
+    }
 
     return(
         
         <div>
-            <div className="mx-[50px] min-h-fit my-5 border-[#b6b2b2] rounded-md overflow-x-auto">
+            <div className="mx-2 min-h-fit my-5 border-[#b6b2b2] rounded-md overflow-x-auto">
                 <table className="w-full text-customGray border">
                     <thead>
                         <tr className="bg-gray-100">
@@ -68,15 +92,18 @@ const CartComponent = () =>{
                     <tbody>
 
                     {
-                        items.map((item, index) => (
+                        items?.items.map((item, index) => (
                             <tr className="border" key={index}>
                                 <td className="py-5 border flex items-center justify-center space-x-6">
-                                    <Image src={Delete} alt="delete icon" width={35} height={35} className="cursor-pointer ml-4" onClick={()=>DeleteItem(item.id)}/>
                                     <Image src={Hamlet} alt="product" width={70} height={70} className="bg-red-500" />
                                     <span className="text-xs md:text-base truncate text-center">{item.product_name}</span>
                                 </td>
                                 <td className="py-5 border text-sm md:text-base text-center">{item.product_price} <span>تومن</span></td>
-                                <td className="py-5 border text-sm md:text-base text-center">{item.quantity}</td>
+                                <td className="py-5 border text-sm md:text-base text-center">
+                                    <div className="flex-center mb-2"><Image src={minus} width={20} height={20} alt="minus"/></div>
+                                    <div>{item.quantity}</div>
+                                    <div className="flex-center mt-2"><Image onClick={()=>plusItem(item.id)} src={plus} width={20} height={20} alt="plus"/></div>
+                                </td>
                                 <td className="py-5 border text-sm md:text-base text-center">{item.get_total_price} <span>تومن</span></td>
                             </tr>
                         ))
@@ -88,7 +115,7 @@ const CartComponent = () =>{
 
 
 
-            <div className="mx-[50px] flex mt-10 flex-col lg:flex-row lg:items-start">
+            <div className="mx-10 flex mt-10 flex-col lg:flex-row lg:items-start">
                 <div className="w-full lg:w-1/2 pr-0 lg:pr-5 mb-7 lg:mb-0 flex justify-center items-center flex-col">
                     <label className="text-[20px] text-customGray pb-4 lg:pb-0 ml-2 w-[140px] text-center lg:text-right">کد تخفیف</label>
                     <div className="flex items-center">
@@ -98,11 +125,12 @@ const CartComponent = () =>{
                 </div>
 
                 <div className="w-full lg:w-1/2 flex flex-col items-center justify-end mt-5 lg:mt-0">
-                    <div className="flex items-center gap-5">
-                        <h1 className="text-[18px] text-customGray w-[120px]">مجموع قیمت:</h1>
-                        <h2 className="text-[24px] font-semibold w-[200px]">
-                            {cartList.length > 0 ? `${cartList[0].get_total_price} تومان` : 'در حال بارگذاری...'}
-                        </h2>
+                    <div className="flex items-center gap-5 text-lg text-customGray font-bold">
+                        <p className="">مجموع قیمت:</p>
+                        <p className="">
+                            {items?.get_total_price}
+                        </p>
+                        <p>تومان</p>
                     </div>
                     <button className="bg-blue-500 text-white px-10 py-2 mt-4 rounded-md hover:bg-blue-600 w-full" onClick={()=>window.location.reload()}>پرداخت</button>
                 </div>
