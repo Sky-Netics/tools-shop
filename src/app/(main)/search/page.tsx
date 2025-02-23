@@ -3,6 +3,7 @@ import Link from "next/link";
 import ProductFilter from "../products/_components/productFilter";
 import RightFilter from "../products/_components/rightFilter";
 import ProductRenderer from "../products/_components/productDenderer";
+import { Metadata } from "next";
 
 
 interface QueryParamsProps{
@@ -10,6 +11,31 @@ interface QueryParamsProps{
   searchParams: { [key: string]: string | undefined };
 }
 
+
+export const metadata:Metadata = {
+  title:"ابزارقفلی – فروشگاه ابزار قفلي",
+  description:"ابزار قفلی فروشگاه اینترنتی تخصصی در حوزه ابزار دستی، ابزار برقی، ابزار گاراژی فعالت دارد.هدف از راه اندازی فروش اینترنتی ابزار قفلی برای خرید هر زمان از شب",
+  
+  robots:"index, follow",
+
+  openGraph:{
+    title:"ابزارقفلی – فروشگاه ابزار قفلي",
+    description:"ابزار قفلی فروشگاه اینترنتی تخصصی در حوزه ابزار دستی، ابزار برقی، ابزار گاراژی فعالت دارد.هدف از راه اندازی فروش اینترنتی ابزار قفلی برای خرید هر زمان از شب",
+    url: 'https://abzarghofli.ir/search',
+    type: 'website',
+    images: [
+      {
+        url: 'https://abzarghofli.ir/assets/logo.png',
+        width: 150,
+        height: 80,
+        alt: 'ابزار قفلی',
+        type: 'image/png'
+      }
+    ],
+    locale :"fa_IR"
+  },
+  
+}
 
 export default async function SearchPage({params,searchParams}:QueryParamsProps) {
   const query = await searchParams

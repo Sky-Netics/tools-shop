@@ -2,6 +2,33 @@ import Link from "next/link"
 import RightFilter from "./_components/rightFilter"
 import ProductFilter from "./_components/productFilter"
 import ProductRenderer from "./_components/productDenderer"
+import { Metadata } from "next"
+
+
+export const metadata:Metadata = {
+    title:"ابزارقفلی – فروشگاه ابزار قفلي",
+    description:"ابزار قفلی فروشگاه اینترنتی تخصصی در حوزه ابزار دستی، ابزار برقی، ابزار گاراژی فعالت دارد.هدف از راه اندازی فروش اینترنتی ابزار قفلی برای خرید هر زمان از شب",
+    
+    robots:"index, follow",
+  
+    openGraph:{
+      title:"ابزارقفلی – فروشگاه ابزار قفلي",
+      description:"ابزار قفلی فروشگاه اینترنتی تخصصی در حوزه ابزار دستی، ابزار برقی، ابزار گاراژی فعالت دارد.هدف از راه اندازی فروش اینترنتی ابزار قفلی برای خرید هر زمان از شب",
+      url: 'https://abzarghofli.ir/products',
+      type: 'website',
+      images: [
+        {
+          url: 'https://abzarghofli.ir/assets/logo.png',
+          width: 150,
+          height: 80,
+          alt: 'ابزار قفلی',
+          type: 'image/png'
+        }
+      ],
+      locale :"fa_IR"
+    },
+}
+
 
 const ProductPage = () => {
 

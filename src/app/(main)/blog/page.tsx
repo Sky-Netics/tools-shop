@@ -1,5 +1,6 @@
 import React from 'react';
 import BlogPostCard from '../../components/BlogPost/blogPost'
+import { Metadata } from 'next';
 
 type PostsType = {
     id: number,
@@ -62,6 +63,31 @@ const posts: PostsType[] = [
   },
 
 ];
+
+export const metadata:Metadata = {
+  title:"ابزارقفلی – وبلاگ",
+  description:"ابزار قفلی فروشگاه اینترنتی تخصصی در حوزه ابزار دستی، ابزار برقی، ابزار گاراژی فعالت دارد.هدف از راه اندازی فروش اینترنتی ابزار قفلی برای خرید هر زمان از شب",
+  
+  robots:"index, follow",
+
+  openGraph:{
+    title:"ابزارقفلی – وبلاگ",
+    description:"ابزار قفلی فروشگاه اینترنتی تخصصی در حوزه ابزار دستی، ابزار برقی، ابزار گاراژی فعالت دارد.هدف از راه اندازی فروش اینترنتی ابزار قفلی برای خرید هر زمان از شب",
+    url: 'https://abzarghofli.ir/blog',
+    type: 'website',
+    images: [
+      {
+        url: 'https://abzarghofli.ir/assets/logo.png',
+        width: 150,
+        height: 80,
+        alt: 'ابزار قفلی',
+        type: 'image/png'
+      }
+    ],
+    locale :"fa_IR"
+  },
+}
+
 
 export default function BlogPage() {
   return (
