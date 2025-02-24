@@ -33,10 +33,17 @@ const Navbar = () => {
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`${BACKEND_DOMAIN}/usercart/cart/`)
+            const response = await fetch(`${BACKEND_DOMAIN}/usercart/cart/`,{
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${localStorage.getItem("access")}`
+                }
+            })
             if (response.ok){
                 const result = await response.json();
-                setTotal(result[0].item_count)
+                if (result[0] !== undefined)
+                    setTotal(result[0]?.item_count)
             }
         }
         fetchData()

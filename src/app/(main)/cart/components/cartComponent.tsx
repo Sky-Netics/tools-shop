@@ -1,8 +1,8 @@
 'use client'
 
-import { useEffect, useState } from "react";
 import Image from "next/image";
-import Hamlet from '../../../../../public/assets/tools/Hamlet.webp';
+import { useEffect, useState } from "react";
+
 import minus from '../../../../../public/minus.svg';
 import plus from '../../../../../public/plus.svg';
 import { BACKEND_DOMAIN } from "@/app/backDomain";
@@ -11,6 +11,7 @@ import addToCart from "@/app/actions/addToCart";
 import { useRouter } from "next/navigation";
 import { UserInfo } from "@/app/interfaces/userInfo";
 import { isUser, refreshUser } from "@/app/actions/isUser";
+import { deleteItem, updateCart } from "@/app/actions/updateCart";
 
 const CartComponent = () =>{
     const router = useRouter();
@@ -37,9 +38,16 @@ const CartComponent = () =>{
 
     useEffect(()=>{
         const fetchData = async ()=>{
-            const response = await fetch(`${BACKEND_DOMAIN}/usercart/cart/`)
+            const response = await fetch(`${BACKEND_DOMAIN}/usercart/cart/`,{
+                method:"GET",
+                headers:{
+                    "Content-Type":"application/json",
+                    "Authorization":`Bearer ${localStorage.getItem("access")}`
+                }
+            })
             if (response.ok){
                 const result = await response.json();
+                console.log(result)
                 setItems(result[0])
             }
         }
@@ -68,8 +76,16 @@ const CartComponent = () =>{
     //     }
     // }
     
-    const plusItem = (id:number)=>{
-        addToCart(`${id}`)
+    const plusItem = (id:number,q:number,action:string)=>{
+        if (action === "minus"){
+            if (q <= 1){
+                deleteItem(`${id}`)
+            }else{
+                updateCart(`${id}`,q-1)
+            }
+        }else{
+            updateCart(`${id}`,q+1)
+        }
         setTimeout(()=>{
             setRefresh(!refresh)
         },300)
@@ -94,15 +110,15 @@ const CartComponent = () =>{
                     {
                         items?.items.map((item, index) => (
                             <tr className="border" key={index}>
-                                <td className="py-5 border flex items-center justify-center space-x-6">
-                                    <Image src={Hamlet} alt="product" width={70} height={70} className="bg-red-500" />
+                                <td className="py-5 border flex items-center gap-2 justify-around space-x-6">
+                                    <img src={`${BACKEND_DOMAIN}${item.product_image}`} alt={item.product_name} width={70} height={70} className="w-16 h-16 object-cover" />
                                     <span className="text-xs md:text-base truncate text-center">{item.product_name}</span>
                                 </td>
                                 <td className="py-5 border text-sm md:text-base text-center">{item.product_price} <span>تومن</span></td>
                                 <td className="py-5 border text-sm md:text-base text-center">
-                                    <div className="flex-center mb-2"><Image src={minus} width={20} height={20} alt="minus"/></div>
+                                    <div className="flex-center mb-2"><Image onClick={()=>plusItem(item.id,item.quantity,"minus")} src={minus} width={20} height={20} alt="minus"/></div>
                                     <div>{item.quantity}</div>
-                                    <div className="flex-center mt-2"><Image onClick={()=>plusItem(item.id)} src={plus} width={20} height={20} alt="plus"/></div>
+                                    <div className="flex-center mt-2"><Image onClick={()=>plusItem(item.id,item.quantity,"plus")} src={plus} width={20} height={20} alt="plus"/></div>
                                 </td>
                                 <td className="py-5 border text-sm md:text-base text-center">{item.get_total_price} <span>تومن</span></td>
                             </tr>

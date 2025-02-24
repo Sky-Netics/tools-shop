@@ -18,8 +18,8 @@ const Slider = () => {
     }, [imagesArray.length])
 
     return (
-        <div className="flex items-center rounded-md">
-            <Image src={imagesArray[indexArray]} alt={`slide image ${indexArray + 1}`} className="h-fit bg-gray-200 w-full rounded-md" />
+        <div className="flex items-center h-full w-full rounded-md">
+            <Image src={imagesArray[indexArray]} alt={`slide image ${indexArray + 1}`} className="bg-gray-200 h-full w-[900px] rounded-md" />
         </div>
     )
 }
